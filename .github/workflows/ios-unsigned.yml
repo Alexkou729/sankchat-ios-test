@@ -26,7 +26,7 @@ jobs:
           fetch-depth: 0
 
       - name: Download source bundle
-        run: curl -fL https://sankchat.fun/downloads/sankchat-ios-source.zip -o /tmp/sankchat-ios-source.zip
+        run: curl -fL https://sankchat.fun/downloads/sankchat-ios-source-r2.zip -o /tmp/sankchat-ios-source.zip
 
       - name: Extract source bundle
         run: unzip -q /tmp/sankchat-ios-source.zip -d source
