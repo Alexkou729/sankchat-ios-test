@@ -6,7 +6,7 @@ on:
       release_tag:
         description: GitHub Release tag
         required: true
-        default: ios-v1.6.3
+        default: ios-v1.6.4
   push:
     tags:
       - 'ios-v*'
@@ -26,7 +26,7 @@ jobs:
           fetch-depth: 0
 
       - name: Download source bundle
-        run: curl -fL https://sankchat.fun/downloads/sankchat-ios-source-r5.zip -o /tmp/sankchat-ios-source.zip
+        run: curl -fL https://sankchat.fun/downloads/sankchat-ios-source-r6.zip -o /tmp/sankchat-ios-source.zip
 
       - name: Extract source bundle
         run: unzip -q /tmp/sankchat-ios-source.zip -d source
@@ -52,13 +52,13 @@ jobs:
           chmod +x source/scripts/package_unsigned_ipa.sh
           source/scripts/package_unsigned_ipa.sh \
             source/client/build/ios/iphoneos/Runner.app \
-            dist/SankChat-iOS-v1.6.3-unsigned.ipa
+            dist/SankChat-iOS-v1.6.4-unsigned.ipa
 
       - name: Upload workflow artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SankChat-iOS-v1.6.3-unsigned
-          path: dist/SankChat-iOS-v1.6.3-unsigned.ipa
+          name: SankChat-iOS-v1.6.4-unsigned
+          path: dist/SankChat-iOS-v1.6.4-unsigned.ipa
           if-no-files-found: error
 
       - name: Create release tag
@@ -73,9 +73,9 @@ jobs:
           tag_name: ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.release_tag || github.ref_name }}
           name: SankChat iOS ${{ github.event_name == 'workflow_dispatch' && github.event.inputs.release_tag || github.ref_name }}
           target_commitish: ${{ github.sha }}
-          files: dist/SankChat-iOS-v1.6.3-unsigned.ipa
+          files: dist/SankChat-iOS-v1.6.4-unsigned.ipa
           body: |
-            SankChat iOS v1.6.3 unsigned IPA.
+            SankChat iOS v1.6.4 unsigned IPA.
 
             该 IPA 未签名，不能直接在 iPhone 上安装。
             测试人员需使用 Sideloadly 或 AltStore，使用自己的 Apple ID 重签后安装。
